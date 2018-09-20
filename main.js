@@ -27,7 +27,6 @@ class Grid {
             wrapper.appendChild(columnDiv);
         }
         dest.appendChild(wrapper);
-        // return arrayOfColumns;
     }
     searchForCell(columnNumber, rowNumber) {
         return this.gridArray[columnNumber][rowNumber];
@@ -39,33 +38,16 @@ class Grid {
         neighbors.push(this.gridArray[cell.columnNumber][cell.rowNumber + 1])
         neighbors.push(this.gridArray[cell.columnNumber + 1][cell.rowNumber])
         neighbors.push(this.gridArray[cell.columnNumber][cell.rowNumber - 1])
-        // let filteredNeighbors = neighbors.filter(cell => cell !== undefined)
         return neighbors.filter(cell => cell !== undefined)
     }
-    // addEventListenerToCells(callBackFunction) {
-    //     for (let c = 0; c < this.numberOfColumns; c++) {
-    //         for (let r = 0; r < this.numberOfRows; r++) {
-    //             let cellDiv = document.getElementById(`cellAtColumn${c}Row${r}`);
-    //             cellDiv.addEventListener('click', callBackFunction);
-    //         }
-    //     }
-    // }
     forEachCell(callBackFunction){
             for (let c = 0; c < this.numberOfColumns; c++) {
 
                 for (let r = 0; r < this.numberOfRows; r++) {
                     callBackFunction(this.gridArray[c][r]);
-
                 }
             }
-        
     }
-    // addEventListner(cell, callBackFunction) {
-    //     let cellDiv = document.getElementById(.divID);
-    //     cellDiv.addEventListener('click', callBackFunction);
-
-    // }
-
 }
 
 class Cell {
@@ -88,9 +70,11 @@ class Cell {
         this.clicked = true;
     }
     addEventListner(callBackFunction) {
-        // let cellDiv = document.getElementById(this.divID);
         this.cellDiv.addEventListener('click', callBackFunction);
 
+    }
+    removeEventListner(callBackFunction) {
+        this.cellDiv.removeEventListener('click', callBackFunction);
     }
 
 }
@@ -101,16 +85,12 @@ const grid1 = new Grid({
     name: 'superSweetGrid'
 })
 
-// console.log(grid1.gridArray);
-// console.log(grid1.searchForCell(1, 2));
-
-// console.log(grid1.gridArray);
 function hello(event) {
     console.log(event.target)
 }
-// const cell1 = new Cell(1,2);
-// console.log(cell1);
+
 
 let cellTest = grid1.searchForCell(1,3);
-console.log(cellTest)
-console.log(grid1.findNeighbors(cellTest))
+console.log('searchForCell at col 1 row 3 and set it as clicked',grid1.searchForCell(1,3).setAsClicked)
+console.log('neightbors',grid1.findNeighbors(cellTest))
+
